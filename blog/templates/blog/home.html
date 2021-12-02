@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-sm-12 my-5">
+    <h3 class="text-white">Home Page</h3>
+    {% for post in posts %}
+    <div class="jumbotron jumbotron-fluid jumbo-color">
+      <div class="container">
+        <h1 class="font-weight-bold">{{post.title}}</h1>
+        <p class="lead">{{post.desc}}</p>
+        <p class="lead">{{post.date}}</p>
+
+          <p class="text-right ">Author <i>{{post.user.first_name}} {{post.user.last_name}}</i></p>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="text-center">
+        {% if posts.has_previous %}
+            <a href="?page={{posts.previous_page_number}}" class="btn btn-primary">Previous</a>
+        {% endif %}
+        <span>Page {{posts.number}} of {{posts.pages}}</span>
+        {% if posts.has_next %}
+            <a href="?page={{posts.next_page_number}}" class="btn btn-primary">Next</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
